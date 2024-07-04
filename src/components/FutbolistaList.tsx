@@ -56,6 +56,7 @@ const FutbolistaList: React.FC = () => {
               <th>Nombres</th>
               <th>Apellidos</th>
               <th>Fecha de Nacimiento</th>
+              <th>Características</th>
               <th>Posición</th>
               <th>Acciones</th>
             </tr>
@@ -67,6 +68,7 @@ const FutbolistaList: React.FC = () => {
                 <td>{futbolista.nombres}</td>
                 <td>{futbolista.apellidos}</td>
                 <td>{new Date(futbolista.fechaNacimiento).toLocaleDateString()}</td>
+                <td>{futbolista.caracteristicas}</td>
                 <td>{futbolista.posicion.nombre}</td>
                 <td>
                   <button
