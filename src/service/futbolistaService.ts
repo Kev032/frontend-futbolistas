@@ -19,3 +19,18 @@ export const getFutbolistaById = async (id: number): Promise<Futbolista> => {
   const data = await response.json();
   return data;
 };
+
+export const updateFutbolista = async (id: number, futbolista: Futbolista): Promise<Futbolista> => {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(futbolista)
+  });
+  if (!response.ok) {
+    throw new Error('Error updating futbolista');
+  }
+  const data = await response.json();
+  return data;
+};

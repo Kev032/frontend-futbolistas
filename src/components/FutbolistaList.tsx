@@ -3,6 +3,7 @@ import { Futbolista } from '../model/Futbolista';
 import { getFutbolistas, getFutbolistaById } from '../service/futbolistaService';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { useNavigate } from 'react-router-dom';
 
 
 const API_URL = 'http://localhost:8080/futbolista';
@@ -12,6 +13,7 @@ const FutbolistaList: React.FC = () => {
     const [page, setPage] = useState(0);
     const [size] = useState(10);
     const MySwal = withReactContent(Swal);
+    const navigate = useNavigate();
   
     useEffect(() => {
       fetchFutbolistas(page, size);
@@ -25,6 +27,10 @@ const FutbolistaList: React.FC = () => {
         console.error('Error fetching futbolistas:', error);
       }
     };
+
+    const updateFutbolista = (id: number) => {
+      navigate(`/update/${id}`);
+    }
   
     const showDetails = async (id: number) => {
       try {
@@ -49,6 +55,7 @@ const FutbolistaList: React.FC = () => {
   
     return (
       <div className="container mt-5">
+        <h1 className="mb-4">Lista de Futbolistas</h1>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
@@ -72,11 +79,17 @@ const FutbolistaList: React.FC = () => {
                 <td>{futbolista.posicion.nombre}</td>
                 <td>
                   <button
-                    className="btn btn-info btn-sm"
+                    className="btn btn-info btn-warning"
                     onClick={() => showDetails(futbolista.id)}
                   >
                     Detalles
                   </button>
+                  <button
+                  className="btn btn-info btn-sm ml-3"
+                  onClick={() => updateFutbolista(futbolista.id)}
+                >
+                  Actualizar
+                </button>
                 </td>
               </tr>
             ))}
